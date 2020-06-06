@@ -3,6 +3,11 @@ set -e
 set -u 
 set -o pipefail
 
+ if [ $# -eq 0 ]; then
+        echo "No arguments provided"
+        exit 1
+ fi
+
 while getopts 'ahv' OPTION; do 
     case "$OPTION" in 
         h)
@@ -18,8 +23,3 @@ while getopts 'ahv' OPTION; do
     esac
 done 
 shift "$(($OPTIND -1))"
-
- if [ $# -eq 0 ]; then
-        echo "No arguments provided"
-        exit 1
- fi
