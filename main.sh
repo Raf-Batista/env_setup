@@ -8,7 +8,7 @@ set -o pipefail
         exit 1
  fi
 
-while getopts 'ahv' OPTION; do 
+while getopts 'ahvb' OPTION; do 
     case "$OPTION" in 
         h)
           echo HELP
@@ -16,6 +16,9 @@ while getopts 'ahv' OPTION; do
         v) 
           echo "Version 1.0"
           ;;
+        b) 
+          /bin/bash ./scripts/display_git_branch.sh
+          ;;  
         ?) 
         echo "$(basename $0) [-h] [-v]" >&2
         exit 1
