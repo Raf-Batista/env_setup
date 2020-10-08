@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt
+
 # Show git branch in terminal in green
 printf '\n' >> ~/.bashrc
 echo 'git_branch() {' >> ~/.bashrc
