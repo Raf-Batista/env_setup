@@ -1,5 +1,9 @@
 #!/bin/bash 
 
+red=$'\e[1;31m'
+green=$'\e[1;32m'
+end=$'\e[0m'
+
 while(($#)); do 
 
 	case "$1" in
@@ -17,7 +21,7 @@ while(($#)); do
     --help) ./scripts/help.sh ;;
 
 
-	*) echo "Option $1 not recognized" ;;
+	*) printf "Option $1 not a recognized command. \n Use ${green}--help${end} to see available options. \n" ;;
 
 	esac
 
