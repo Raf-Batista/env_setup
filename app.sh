@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-source ./scripts/color_env_variables.sh
+source ./scripts/utilitites/color_env_variables.sh
 
 while : ; do 
 	printf "\n Welcome to env setup" 
