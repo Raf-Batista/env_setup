@@ -37,4 +37,14 @@ echo 'The SSH was copied to your clipboard. Enter the SSH Key on github'
 
 # Open github on chrome
 
-google-chrome www.github.com
+# google-chrome www.github.com
+
+####### GitHub CLI ######### 
+
+# Installation Instructions https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+# Commands https://cli.github.com/manual/
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+sudo apt install gh
