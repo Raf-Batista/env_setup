@@ -10,7 +10,7 @@ while(($#)); do
 
   # -g) ./scripts/github.sh ;; # Use Faraday to log a user in to GitHub before commenting this out
 
-	-d | --docker) ./scripts/docker.sh ;;
+	-d | --docker) ./scripts/dev_ops/docker.sh ;;
 
     --gitbranch) ./scripts/display_git_branch.sh ;;
 
