@@ -31,7 +31,19 @@ while :; do
 
 		printf "\n"
 
-		break
+		printf "\n Do you want env_setup to give all users execute permissions for the scripts? \n"
+		printf " \n"
+		read user_input 
+
+		if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
+			chmod -R a+x ./scripts
+			echo "Permissions changed"
+			printf "\n"
+		else 
+			printf " Exiting EnvSetup. \n \n"
+			break
+		fi 
+
 	fi
 
 	printf "\n Welcome to env setup"
