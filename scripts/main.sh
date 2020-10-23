@@ -8,6 +8,8 @@ while(($#)); do
 
 	-n) ./scripts/node.sh ;;
 
+	--node-info) ./scripts/help_scripts/node_help.sh ;;
+
   # -g) ./scripts/github.sh ;; # Use Faraday to log a user in to GitHub before commenting this out
 
 	-d | --docker) ./scripts/dev_ops/docker.sh ;;
