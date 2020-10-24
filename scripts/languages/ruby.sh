@@ -30,6 +30,30 @@
 
 # Check if rvm is installed, if it is then we can just install Ruby
 
+FILE=$PWD/installed.txt
+
+if test -f "$FILE"; then
+
+    while read line; do 
+
+    if [[ $line == "rvm" ]]; then 
+
+        printf "\nYou have rvm installed already, would you like to install Ruby? \n 'Y/N'"
+
+        read user_input
+
+        if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
+          rvm install ruby
+         
+          break
+        fi
+
+    fi 
+
+    done < FILE
+
+fi
+
 sudo apt-get install software-properties-common
 
 sudo apt-add-repository -y ppa:rael-gc/rvm
@@ -38,9 +62,10 @@ sudo apt-get install rvm
 
 echo 'source "/etc/profile.d/rvm.sh"' >> ~/.bashrc
 
-# Need to restart computer
+echo "rvm" >> ../../../../installed.txt
 
-rvm install ruby
+echo "You may need to restart your computer to install Ruby. Run the same script to install it."
+
 
 
 
