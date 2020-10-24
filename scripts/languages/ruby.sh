@@ -30,41 +30,81 @@
 
 # Check if rvm is installed, if it is then we can just install Ruby
 
+# https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" 
+
 FILE=$PWD/installed.txt
+
 
 if test -f "$FILE"; then
 
     while read line; do 
 
     if [[ $line == "rvm" ]]; then 
-
-        printf "\nYou have rvm installed already, would you like to install Ruby? \n 'Y/N'"
-
-        read user_input
-
-        if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
-          rvm install ruby
-         
-          break
-        fi
-
+      rvm=true
     fi 
 
-    done < FILE
+    if [[ $line == "ruby" ]]; then 
+      ruby=true
+    fi 
 
+  done < $FILE
 fi
 
-sudo apt-get install software-properties-common
+# https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
 
-sudo apt-add-repository -y ppa:rael-gc/rvm
-sudo apt-get update
-sudo apt-get install rvm
 
-echo 'source "/etc/profile.d/rvm.sh"' >> ~/.bashrc
+if [ -z ${rvm+x} ]; then 
+  echo "rvm is installed already, would you like to install Ruby?"; 
+else 
+  echo "var is set to '$rvm'"; 
+fi
 
-echo "rvm" >> ../../../../installed.txt
 
-echo "You may need to restart your computer to install Ruby. Run the same script to install it."
+
+# if test -f "$FILE"; then
+
+#     while read line; do 
+
+#     if [[ $line == "rvm" ]]; then 
+
+#         printf "\nYou have rvm installed already, would you like to install Ruby? \n 'Y/N'\n"
+
+#         read user_input
+
+#         if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
+#           rvm install ruby
+           
+#           echo "ruby" >> $DIR/install.txt
+          
+#           break
+#         fi
+
+#     fi 
+
+#     if [[ $line == "ruby" ]]; then 
+#       echo "You have Ruby installed already"
+#       break
+#     fi 
+
+#     done < FILE
+
+# fi
+
+
+
+# sudo apt-get install software-properties-common
+
+# sudo apt-add-repository -y ppa:rael-gc/rvm
+# sudo apt-get update
+# sudo apt-get install rvm
+
+# echo 'source "/etc/profile.d/rvm.sh"' >> ~/.bashrc
+
+# echo "rvm" >> ../../../../installed.txt
+
+# echo "You may need to restart your computer to install Ruby. Run the same script to install it."
 
 
 
