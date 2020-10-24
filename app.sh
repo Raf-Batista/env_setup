@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./scripts/color_env_variables.sh
+source ./scripts/directory.sh
 
 while :; do
 
@@ -28,11 +29,10 @@ while :; do
 		printf "\n To give all users execute permissions of the scripts use - "
 		printf "\n"
 		printf "\n ${green}chmod -R a+x ./scripts${end}\n"
-
 		printf "\n"
-
 		printf "\n Do you want env_setup to give all users execute permissions for the scripts? \n"
 		printf " \n"
+
 		read user_input 
 
 		if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
@@ -46,7 +46,7 @@ while :; do
 
 	fi
 
-	printf "\n Welcome to env setup"
+	printf "\n \n Welcome to env setup"
 	printf "\n Type exit to exit the program \n \n"
 	read input
 
