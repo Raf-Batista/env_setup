@@ -4,7 +4,7 @@ while(($#)); do
 
 	case "$1" in
 
-	# -r | --ruby) echo "install ruby" ;; Update script before commenting this out
+    -r | --ruby) ./scripts/languages/ruby.sh ;; 
 
 	-n) ./scripts/node.sh ;;
 
