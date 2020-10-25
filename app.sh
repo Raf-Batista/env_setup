@@ -46,8 +46,16 @@ while :; do
 
 	fi
 
-	printf "\n \n Welcome to env setup"
-	printf "\n Type exit to exit the program \n \n"
+	# printf "\n \n Welcome to env setup"
+	# printf "\n Type exit to exit the program \n \n"
+
+	cat <<- EOF 
+
+		Welcome to Env Setup
+		Type "exit" to exit the program
+
+	EOF
+
 	read input
 
 	if [[ $input == "exit" ]]; then
