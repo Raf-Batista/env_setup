@@ -17,12 +17,12 @@ while :; do
 			use the chmod command and pass in the users who you want to change permission
 			If you want to change permissions for all files inside sub directories use the -R option
 
-			u - owner"
-			g - group"
-			o - others (not user or group permission)"
-			a - all"
+			u - owner
+			g - group
+			o - others (not user or group permission)
+			a - all
 		
-			then you use the '+' sign followed by the permission"
+			then you use the '+' sign followed by the permission
 			r - read"
 			w - write"
 			x - execute"
