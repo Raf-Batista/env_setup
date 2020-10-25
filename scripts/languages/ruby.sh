@@ -20,7 +20,7 @@ if [[ -f "$FILE" ]]; then
 
 fi
 
-if [ -z ${rvm+x} ]; then
+if [[ -z ${rvm+x} ]]; then
 
   echo "You do not have rvm installed"
 
@@ -35,7 +35,7 @@ if [ -z ${rvm+x} ]; then
 
   printf "rvm\n" >> $DIR/installed.txt
 
-elif [ -z ${ruby+x} ]; then
+elif [[ -z ${ruby+x} ]]; then
 
   echo "You have rvm installed but not ruby"
 
