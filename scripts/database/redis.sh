@@ -1,24 +1,49 @@
-#/bin/bash
+#!/bin/bash
 
-# https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
+FILE=$DIR/installed.txt
 
-############## INSTALL REDIS SERVER #################
+if [[ -f "$FILE" ]]; then
 
-# Begin by updating your local apt package cache:
+    while read line; do
 
-sudo apt update
+        if [[ $line == "postgres" ]]; then
+            redis=true
+        fi
 
-# Then install Redis by typing:
+    done <$FILE
 
-sudo apt install redis-server
+fi
 
-# Open this file with your preferred text editor:
+if [[ -z ${redis+x} ]]; then
 
-sudo nano /etc/redis/redis.conf
+    echo "You do not have redis installed"
 
-# Change supervised from no to systemd
+    # https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
 
-# Then, restart the Redis service to reflect the changes you made to the configuration file:
+    ############## INSTALL REDIS SERVER #################
 
-sudo systemctl restart redis.service
+    # Begin by updating your local apt package cache:
 
+    sudo apt update
+
+    # Then install Redis by typing:
+
+    sudo apt install redis-server
+
+    # Open this file with your preferred text editor:
+
+    sudo nano /etc/redis/redis.conf
+
+    # Change supervised from no to systemd
+
+    # Then, restart the Redis service to reflect the changes you made to the configuration file:
+
+    sudo systemctl restart redis.service
+
+    printf "redis\n" >>$DIR/installed.txt
+
+else
+
+    echo "You have redis installed"
+
+fi
