@@ -1,38 +1,87 @@
 #!/bin/bash
 
-############# Node JS with nvm ###############
 # https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/
 
-# download and install nvm script
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+FILE=$DIR/installed.txt
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [[ -f "$FILE" ]]; then
 
-nvm install node
+    while read line; do
 
-nvm install --lts
+        if [[ $line == "rvm" ]]; then
+            nmv=true
+        fi
 
-# To list installed Node.js versions type:
+        if [[ $line == "ruby" ]]; then
+            node=true
+        fi
 
-# nvm ls
+    done <$FILE
 
-# You can install different versions like this
-# nvm install 8.10.0
+fi
 
-# You can switch versions like this
-# nvm use 10.16.3
+if [[ -z ${nvm+x} ]]; then
 
-# You can change the default version
-# nvm alias default 10.16.3
+    echo "You do not have nvm installed"
 
-# Set file permissions
+    # download and install nvm script
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-sudo chown root:staff /usr/bin
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-sudo chmod 0775 /usr/bin
+    printf "nvm\n" >>$DIR/installed.txt
 
-sudo chown -R root:npm /usr/lib/node_modules
+    nvm install node
 
-sudo chmod 0775 /usr/lib/node_modules
+    nvm install --lts
+
+    # To list installed Node.js versions type:
+
+    # nvm ls
+
+    # You can install different versions like this
+    # nvm install 8.10.0
+
+    # You can switch versions like this
+    # nvm use 10.16.3
+
+    # You can change the default version
+    # nvm alias default 10.16.3
+
+    # Set file permissions
+
+    sudo chown root:staff /usr/bin
+
+    sudo chmod 0775 /usr/bin
+
+    sudo chown -R root:npm /usr/lib/node_modules
+
+    sudo chmod 0775 /usr/lib/node_modules
+
+    printf "node\n" >>$DIR/installed.txt
+
+elif [[ -z ${node+x} ]]; then
+
+    nvm install node
+
+    nvm install --lts
+
+    # Set file permissions
+
+    sudo chown root:staff /usr/bin
+
+    sudo chmod 0775 /usr/bin
+
+    sudo chown -R root:npm /usr/lib/node_modules
+
+    sudo chmod 0775 /usr/lib/node_modules
+
+    printf "node\n" >>$DIR/installed.txt
+
+else
+
+    echo "You have nvm and node installed"
+
+fi
