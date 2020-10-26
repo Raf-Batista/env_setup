@@ -10,7 +10,7 @@ if [[ -f "$FILE" ]]; then
             git=true
         fi
 
-    done <$FILE
+    done < $FILE
 
 fi
 
@@ -66,7 +66,7 @@ if [[ -z ${git+x} ]]; then
     sudo apt update
     sudo apt install gh
 
-    printf "git\n" >>$DIR/installed.txt
+    printf "git\n" >> $DIR/installed.txt
 
 else
 
