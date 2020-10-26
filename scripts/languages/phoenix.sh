@@ -20,7 +20,7 @@ if [[ -f "$FILE" ]]; then
             phoenix=true
         fi
 
-    done <$FILE
+    done < $FILE
 
 fi
 
@@ -56,7 +56,7 @@ if [[ -z ${elixir+x} ]]; then
     #Install Elixir:
     sudo apt-get install elixir
 
-    printf "elixir\n" >>$DIR/installed.txt
+    printf "elixir\n" >> $DIR/installed.txt
 
     ############## Install Phoenix ################
 
