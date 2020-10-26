@@ -5,8 +5,16 @@ source ./scripts/directory.sh
 
 while :; do
 
+	FILE=./scripts/installed.txt
+
+	# Check to see if installed.txt exists. If it doesn't then we run the script to check what's installed in the system and add them to list
+	if [[ ! -f $FILE ]]; then 
+		./scripts/check_installed.sh
+	fi
+
 	permission=$(stat -L -c "%a" ./scripts/main.sh)
 
+	# Check if we have permission to run the main script. If we don't we give the user brief info on changing permission and ask if the user wants Env_Setup to change permissions on their behalf
 	if [[ $permission -le 664 ]]; then
 		cat <<- EOF 
 
@@ -37,6 +45,7 @@ while :; do
 
 		read user_input 
 
+		# capitalizes the user's input and check if it is either "YES" or "Y", if so then we change the permissions of all the scripts
 		if [[ ${user_input^^} == "YES" || ${input^^} == "Y" ]]; then 
 			chmod -R a+x ./scripts
 			echo "Permissions changed"
@@ -48,9 +57,6 @@ while :; do
 
 	fi
 
-	# printf "\n \n Welcome to env setup"
-	# printf "\n Type exit to exit the program \n \n"
-
 	cat <<- EOF 
 
 		Welcome to Env Setup
@@ -60,11 +66,13 @@ while :; do
 
 	read input
 
+	# Break out of loop if user entered "exit"
 	if [[ $input == "exit" ]]; then
 		echo "Goodbye"
 		break
 	fi
 
+	# If user did not exit then this loop will keep running the main script with whatever option the user typed
 	./scripts/main.sh $input
 
 done
