@@ -1,26 +1,52 @@
 #!/bin/bash
 
-######## Install Heroku to deploy apps ##########
-# sudo snap install --classic heroku
+FILE=$DIR/installed.txt
 
-xclip -sel clip < ~/.ssh/id_rsa.pub
-# Copies the contents of the id_rsa.pub file to your clipboard
+if [[ -f "$FILE" ]]; then
 
-echo 'The SSH was copied to your clipboard. Enter the SSH Key on github'
+    while read line; do
 
-########## Install Postgresql ############
+        if [[ $line == "rvm" ]]; then
+            heroku=true
+        fi
 
-sudo apt install postgresql postgresql-contrib
+    done <$FILE
 
-# set role postgres with password postgres
-sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+fi
 
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+if [[ -z ${heroku+x} ]]; then
 
-# Install PGAdmin4
-# Install PostgreSQL key and add repository
+    echo "You do not have heroku installed"
 
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    ######## Install Heroku to deploy apps ##########
+    # sudo snap install --classic heroku
 
-# install PGAdmin repo
-sudo apt install pgadmin4 pgadmin4-apache2 -y
+    xclip -sel clip <~/.ssh/id_rsa.pub
+    # Copies the contents of the id_rsa.pub file to your clipboard
+
+    echo 'The SSH was copied to your clipboard. Enter the SSH Key on github'
+
+    ########## Install Postgresql ############
+
+    sudo apt install postgresql postgresql-contrib
+
+    # set role postgres with password postgres
+    sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+
+    # Install PGAdmin4
+    # Install PostgreSQL key and add repository
+
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+    # install PGAdmin repo
+    sudo apt install pgadmin4 pgadmin4-apache2 -y
+
+    printf "heroku\n" >>$DIR/installed.txt
+
+else
+
+    echo "You have heroku installed"
+
+fi
