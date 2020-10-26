@@ -10,7 +10,7 @@ if [[ -f "$FILE" ]]; then
             heroku=true
         fi
 
-    done <$FILE
+    done < $FILE
 
 fi
 
@@ -43,7 +43,7 @@ if [[ -z ${heroku+x} ]]; then
     # install PGAdmin repo
     sudo apt install pgadmin4 pgadmin4-apache2 -y
 
-    printf "heroku\n" >>$DIR/installed.txt
+    printf "heroku\n" >> $DIR/installed.txt
 
 else
 
