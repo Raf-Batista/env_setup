@@ -32,7 +32,7 @@ if [[ -z ${java+x} ]]; then
 
   sudo dpkg --install amazon-corretto-11-x64-linux-jdk.tar.gz
 
-  printf "java\n" >>$DIR/installed.txt
+  printf "java\n" >> $DIR/installed.txt
 
 else
 
