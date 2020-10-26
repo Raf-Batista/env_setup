@@ -3,30 +3,51 @@
 # https://code.visualstudio.com/docs/setup/linux 
 
 
-# Install VS Code extensions
+FILE=$DIR/installed.txt
 
-# --install-extension <ext>	Install an extension. Provide the full extension name publisher.extension as an argument. Use --force argument to avoid prompts.
-# --uninstall-extension <ext>	Uninstall an extension. Provide the full extension name publisher.extension as an argument.
-# --disable-extensions	Disable all installed extensions. Extensions will still be visible in the Disabled section of the Extensions view but they will never be activated.
-# --list-extensions	List the installed extensions.
-# --show-versions	Show versions of installed extensions, when using --list-extensions
-# --enable-proposed-api <ext>	Enables proposed api features for an extension. Provide the full extension name publisher.extension as an argument.
+if [[ -f "$FILE" ]]; then
 
-sudo apt update
-sudo apt install software-properties-common apt-transport-https wget
+    while read line; do
 
-# Next, import the Microsoft GPG key using the following wget command:
+        if [[ $line == "code" ]]; then
+            code=true
+        fi
 
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    done < $FILE
 
-# And enable the Visual Studio Code repository by typing:
+fi
 
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+if [[ -z ${code+x} ]]; then
 
-# Once the apt repository is enabled, install the latest version of Visual Studio Code with:
+    echo "You do not have vs code installed"
 
-sudo apt update
-sudo apt install code
+    sudo apt update
+    sudo apt install software-properties-common apt-transport-https wget
+
+    # Next, import the Microsoft GPG key using the following wget command:
+
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+
+    # And enable the Visual Studio Code repository by typing:
+
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+    # Once the apt repository is enabled, install the latest version of Visual Studio Code with:
+
+    sudo apt update
+    sudo apt install code
+
+    printf "code\n" >> $DIR/installed.txt
+
+else
+
+    echo "You have vs code installed"
+
+fi
+
+
+
+
 
 
 # code --install-extension ritwickdey.liveserver
