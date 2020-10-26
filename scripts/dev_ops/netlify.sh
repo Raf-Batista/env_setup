@@ -22,7 +22,7 @@ if [[ -z ${netlify+x} ]]; then
 
     npm install netlify-cli -g
 
-    printf "netlify\n" >>$DIR/installed.txt
+    printf "netlify\n" >> $DIR/installed.txt
 
 else
 
