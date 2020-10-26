@@ -1,4 +1,4 @@
-#!bin/bash 
+#!/bin/bash 
 
 FILE=$DIR/installed.txt
 
@@ -20,12 +20,10 @@ if [[ -z ${surge+x} ]]; then
 
     npm install --global surge
 
-    printf "surge\n" >>$DIR/installed.txt
+    printf "surge\n" >> $DIR/installed.txt
 
 else
 
     echo "You have surge installed"
 
 fi
-
-
