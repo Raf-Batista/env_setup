@@ -1,8 +1,35 @@
 #!/bin/bash 
 
+FILE=$DIR/installed.txt
+
+if [[ -f "$FILE" ]]; then
+
+    while read line; do
+
+        if [[ $line == "atom" ]]; then
+            atom=true
+        fi
+
+    done < $FILE
+
+fi
+
+if [[ -z ${atom+x} ]]; then
+
+    echo "You do not have atom installed"
+
+    sudo apt-get install atom
+
+    printf "atom\n" >> $DIR/installed.txt
+
+else
+
+    echo "You have surge installed"
+
+fi
+
 # Install Atom
 
-sudo apt-get install atom
 
 # https://nearsoft.com/blog/how-to-install-packages-in-atom/
 
