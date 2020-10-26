@@ -1,8 +1,8 @@
 #!/bin/bash
 
-while(($#)); do 
+while(($#)); do # Will run loop while there are still options
 
-	case "$1" in
+	case "$1" in # First option passed in to this script
 
     -r | --ruby) ./scripts/languages/ruby.sh ;; 
 
@@ -22,6 +22,6 @@ while(($#)); do
 
 	esac
 
-	shift
+	shift # remove the option, now $1 is not the next option
 
 done
