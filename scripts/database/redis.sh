@@ -10,7 +10,7 @@ if [[ -f "$FILE" ]]; then
             redis=true
         fi
 
-    done <$FILE
+    done < $FILE
 
 fi
 
@@ -40,7 +40,7 @@ if [[ -z ${redis+x} ]]; then
 
     sudo systemctl restart redis.service
 
-    printf "redis\n" >>$DIR/installed.txt
+    printf "redis\n" >> $DIR/installed.txt
 
 else
 
