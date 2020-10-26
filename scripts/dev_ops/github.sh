@@ -1,50 +1,75 @@
 #!/bin/bash
 
-########### Install Git ################
+FILE=$DIR/installed.txt
 
-sudo apt install git-all
+if [[ -f "$FILE" ]]; then
 
-echo 'Enter Github Email Address'
+    while read line; do
 
-read email
+        if [[ $line == "git" ]]; then
+            git=true
+        fi
 
-git config --global user.email $email
+    done <$FILE
 
-echo 'Enter Github Username'
+fi
 
-read username
+if [[ -z ${git+x} ]]; then
 
-git config --global user.name $username
+    echo "You do not have git installed"
 
-# Generate SSH Key
+    ########### Install Git ################
 
-ssh-keygen -t rsa -b 4096 -C $email
+    sudo apt install git-all
 
-# Start SSH agent in background
-eval "$(ssh-agent -s)"
+    echo 'Enter Github Email Address'
 
-# Add SSH key to agent
-ssh-add ~/.ssh/id_rsa
+    read email
 
-# Install xclip
-sudo apt-get install xclip
+    git config --global user.email $email
 
+    echo 'Enter Github Username'
 
-# Copy ssh
-xclip -sel clip < ~/.ssh/id_rsa.pub
+    read username
 
-echo 'The SSH was copied to your clipboard. Enter the SSH Key on github'
+    git config --global user.name $username
 
-# Open github on chrome
+    # Generate SSH Key
 
-# google-chrome www.github.com
+    ssh-keygen -t rsa -b 4096 -C $email
 
-####### GitHub CLI ######### 
+    # Start SSH agent in background
+    eval "$(ssh-agent -s)"
 
-# Installation Instructions https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-# Commands https://cli.github.com/manual/
+    # Add SSH key to agent
+    ssh-add ~/.ssh/id_rsa
 
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
-sudo apt update
-sudo apt install gh
+    # Install xclip
+    sudo apt-get install xclip
+
+    # Copy ssh
+    xclip -sel clip <~/.ssh/id_rsa.pub
+
+    echo 'The SSH was copied to your clipboard. Enter the SSH Key on github'
+
+    # Open github on chrome
+
+    # google-chrome www.github.com
+
+    ####### GitHub CLI #########
+
+    # Installation Instructions https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+    # Commands https://cli.github.com/manual/
+
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+    sudo apt-add-repository https://cli.github.com/packages
+    sudo apt update
+    sudo apt install gh
+
+    printf "git\n" >>$DIR/installed.txt
+
+else
+
+    echo "You have git installed"
+
+fi
