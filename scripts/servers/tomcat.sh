@@ -1,40 +1,94 @@
 #!/bin/bash 
 
-############# Setup Tomcat Server for Java ################
+# https://www.journaldev.com/39819/install-tomcat-on-linux
 
-# Create user for Tomcat, for security reasons Tomcat should not be run under root user
+FILE=$DIR/installed.txt
 
-sudo groupadd tomcat
+if [[ -f "$FILE" ]]; then
 
-sudo useradd -s /bin/false –g tomcat –d /opt/tomcat tomcat
+    while read line; do
 
-cd /tmp
+        if [[ $line == "tomcat" ]]; then
+            tomcat=true
+        fi
 
-# Tomcat 9
-curl -O http://mirrors.ibiblio.org/apache/tomcat/tomcat-9/v9.0.33/bin/apache-tomcat-9.0.33.tar.gz
+    done < $FILE
 
-# Create directory to extract the tar.gz
-sudo mkdir /opt/tomcat
+fi
 
-sudo tar xzvf apache-tomcat-9*tar.gz –C /opt/tomcat –strip-components=1
+if [[ -z ${tomcat+x} ]]; then
 
-# Modify Tomcat user permissions
+    echo "You do not have tomcat installed"
 
-cd /opt/tomcat
+    # set up Tomcat user 
+    sudo useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
 
-# change group ownership
-sudo chgrp –R tomcat /opt/tomcat
+    # download Tomcat package 
+    wget -c https://downloads.apache.org/tomcat/tomcat-9/v9.0.34/bin/apache-tomcat-9.0.34.tar.gz
 
-# give read access to the conf directory
-sudo chmod –R g+r conf
+    # install Tomcat server 
+    sudo tar xf apache-tomcat-9.0.34.tar.gz -C /opt/tomcat
 
-# change directory permission
-sudo chmod g+x conf
+    # create symbolic link to point to installation directory
+    sudo ln -s /opt/tomcat/apache-tomcat-9.0.34 /opt/tomcat/updated
 
-# give tomcat user ownership of webapps work temp and logs directory
-sudo chown –R tomcat webapps/ work temp/ logs
+    # change ownership 
 
-Create system unit file
+    sudo chown -R tomcat: /opt/tomcat/*
+
+    # provide executable flags to all scripts in bin directory
+
+    sudo sh -c 'chmod +x /opt/tomcat/updated/bin/*.sh'
+
+    # configure Tomcat
+
+cat <<- EOF > /etc/systemd/system/tomcat.service 
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+ 
+[Service]
+Type=forking
+ 
+Environment="JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+Environment="CATALINA_PID=/opt/tomcat/updated/temp/tomcat.pid"
+Environment="CATALINA_HOME=/opt/tomcat/updated/"
+Environment="CATALINA_BASE=/opt/tomcat/updated/"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+Environment="JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
+ 
+ExecStart=/opt/tomcat/updated/bin/startup.sh
+ExecStop=/opt/tomcat/updated/bin/shutdown.sh
+ 
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+ 
+[Install]
+WantedBy=multi-user.target
+
+EOF
+
+    # load the daemon to update the system about the new file 
+
+    sudo systemctl daemon-reload
+
+    # enable Tomcat server to run on startup 
+
+    sudo systemctl enable tomcat
+
+    # allow Tomcat to user port 8080 
+
+    sudo ufw allow 8080/tcp
 
 
-sudo update-java-alternatives -l | grep "/usr.*"
+    printf "tomcat\n" >> $DIR/installed.txt
+
+else
+
+    echo "You have tomcat installed"
+
+fi
+
