@@ -16,7 +16,7 @@ if [[ -f "$FILE" ]]; then
             node=true
         fi
 
-    done <$FILE
+    done < $FILE
 
 fi
 
@@ -31,7 +31,7 @@ if [[ -z ${nvm+x} ]]; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-    printf "nvm\n" >>$DIR/installed.txt
+    printf "nvm\n" >> $DIR/installed.txt
 
     nvm install node
 
@@ -60,7 +60,7 @@ if [[ -z ${nvm+x} ]]; then
 
     sudo chmod 0775 /usr/lib/node_modules
 
-    printf "node\n" >>$DIR/installed.txt
+    printf "node\n" >> $DIR/installed.txt
 
 elif [[ -z ${node+x} ]]; then
 
@@ -78,7 +78,7 @@ elif [[ -z ${node+x} ]]; then
 
     sudo chmod 0775 /usr/lib/node_modules
 
-    printf "node\n" >>$DIR/installed.txt
+    printf "node\n" >> $DIR/installed.txt
 
 else
 
