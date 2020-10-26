@@ -12,7 +12,7 @@ if [[ -f "$FILE" ]]; then
       docker=true
     fi
 
-  done <$FILE
+  done < $FILE
 
 fi
 
@@ -75,7 +75,7 @@ if [[ -z ${docker+x} ]]; then
 
   newgrp docker
 
-  printf "docker\n" >>$DIR/installed.txt
+  printf "docker\n" >> $DIR/installed.txt
 
 else
 
