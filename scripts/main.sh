@@ -4,15 +4,87 @@ while(($#)); do # Will run loop while there are still options
 
 	case "$1" in # First option passed in to this script
 
-    -r | --ruby) ./scripts/languages/ruby.sh ;; 
+     -r | --ruby) ./scripts/languages/ruby.sh ;; 
 
-	-n) ./scripts/node.sh ;;
+	--ruby-info) echo "add script for ruby info script" ;;
+
+	-n | --node) ./scripts/node.sh ;;
 
 	--node-info) ./scripts/help_scripts/node_help.sh ;;
 
+	-phx | --phoenix) ./scripts/languages/phoenix.sh ;; 
+
+	--phoenix-info) echo "Add script for phoenix info" ;;
+
+	-j | --java) ./scripts/languages/java.sh ;;
+
+	--java-info) echo "Add script for java info" ;;
+
+	--c | --c_sharp) ./scripts/languages/c_sharp.sh ;;
+
+	--c_sharp-info) echo "Add script for c sharp info" ;;
+
+	-p | --postgres) ./scripts/databases/postgres.sh ;;
+
+	--postgres-info) echo "Add script for postgres info" ;;
+
+	-rs | --redis) ./scripts/databases/redis.sh ;;
+
+	--redis-info) echo "Add script for redis info" ;;
+
+	-d | --docker) ./scripts/devops/docker.sh ;;
+
+	--docker-info) echo "Add script for docker info" ;;
+
+	-h | --heroku) ./scripts/devops/heroku.sh ;;
+
+	--heroku-info) echo "Add script for heroku info" ;;
+
+	-n | --netlify) ./scripts/devops/netlify.sh ;;
+
+	--netlify-info) echo "Add script for netlify info" ;;
+
+	-s | --surge) ./scripts/devops/surge.sh ;;
+
+	--surge-info) echo "Add script for surge info" ;;
+
+	-t | --tomcat) ./scripts/servers/tomcat.sh ;;
+
+	--tomcat-info) echo "Add script for tomcat info" ;;
+
+	-a | --atom) ./scripts/editors/atom.sh ;;
+
+	--atom-info) echo "Add script for atom info" ;;
+
+	-a | --atom) ./scripts/editors/atom.sh ;;
+
+	--atom-info) echo "Add script for atom info" ;;
+
+	-i | --intelliJ) ./scripts/editors/intelliJ.sh ;;
+
+	--intelliJ-info) echo "Add script for intelliJ info" ;;
+
+	-sl | --sublime) ./scripts/editors/sublime.sh ;;
+
+	--sublime-info) echo "Add script for sublime info" ;;
+
+	-v | --vs_code) ./scripts/editors/vs_code.sh ;;
+
+	--vs_code-info) echo "Add script for vs code info" ;;
+
   # -g) ./scripts/github.sh ;; # Use Faraday to log a user in to GitHub before commenting this out
 
-	-d | --docker) ./scripts/dev_ops/docker.sh ;;
+	-g | --gimp) ./scripts/tools/gimp.sh ;;
+
+	--gimp-info) echo "Add script for gimp info" ;;
+
+	-pm | --postman) ./scripts/tools/postman.sh ;;
+
+	--postman-info) echo "Add script for postman info" ;;
+
+	-z | --zeal) ./scripts/tools/postman.sh ;;
+
+	--zeal-info) echo "Add script for zeal info" ;;
 
     --gitbranch) ./scripts/display_git_branch.sh ;;
 
