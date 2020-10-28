@@ -60,7 +60,16 @@ while :; do
 	cat <<- EOF 
 
 		Welcome to Env Setup
+		Type --help to view availabe commands 
 		Type "exit" to exit the program
+
+		Here is an example of installing ruby and getting info about ruby 
+
+		${blue}-r${end} : Will install rvm (ruby version manager) and ruby
+		${blue}--ruby${end} : long form of above command
+		${blue}--ruby-info${end} : gives you a brief description of what ruby is, every command follows the same structure 
+
+		for example, ${blue}-n${end} and ${blue}--node${end} installs node and to get information about node you hust append ${green}-info${end} to the longform command, in this case it will be ${blue}--node-info${end}
 
 	EOF
 
