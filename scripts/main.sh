@@ -6,15 +6,15 @@ while(($#)); do # Will run loop while there are still options
 
      -r | --ruby) ./scripts/languages/ruby.sh ;; 
 
-	--ruby-info) echo "add script for ruby info script" ;;
+	--ruby-info) ./scripts/info_scripts/ruby_info.sh ;;
 
 	-n | --node) ./scripts/node.sh ;;
 
-	--node-info) ./scripts/help_scripts/node_help.sh ;;
+	--node-info) ./scripts/info_scripts/node_info.sh ;;
 
 	-phx | --phoenix) ./scripts/languages/phoenix.sh ;; 
 
-	--phoenix-info) echo "Add script for phoenix info" ;;
+	--phoenix-info) ./scripts/info_scripts/phoenix_info.sh ;;
 
 	-j | --java) ./scripts/languages/java.sh ;;
 
