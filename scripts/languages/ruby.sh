@@ -39,7 +39,9 @@ elif [[ -z ${ruby+x} ]]; then
 
   echo "You have rvm installed but not ruby"
 
-  rvm install ruby
+  rvm install 2.7.2 # find way to get latest version of ruby
+
+  rvm default 2.7.2
 
   printf "ruby\n" >> $DIR/installed.txt
 
