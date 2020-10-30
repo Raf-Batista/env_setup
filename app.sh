@@ -3,6 +3,7 @@
 source ./scripts/color_env_variables.sh
 source ./scripts/directory.sh
 
+
 while :; do
 
 	FILE=./scripts/installed.txt

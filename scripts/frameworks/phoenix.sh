@@ -34,7 +34,7 @@ if [[ -z ${node+x} ]]; then
 
     if [[ ${user_input^^} == "YES" || ${user_input^^} == "Y" ]]; then
 
-        .$DIR/scripts/languages/node.sh
+        $DIR/frameworks/node.sh
     fi
 
 fi
@@ -44,17 +44,19 @@ if [[ -z ${elixir+x} ]]; then
     echo "You do not have elixir installed"
 
     # run script to install elixir
-    ../languages/elixir.sh
+    $DIR/languages/elixir.sh
 
     ############## Install Phoenix ################
 
     # install the Phoenix archive:
 
-    mix archive.install hex phx_new 1.5.1
+    mix archive.install hex phx_new 1.5.6
 
     # Install inotify tools: File system watcher which Phoenix uses for live code reloading
 
     sudo apt-get install inotify-tools
+
+    printf "phoenix\n" >>$DIR/installed.txt
 
 elif [[ -z ${Phoenix+x} ]]; then
 
@@ -62,7 +64,7 @@ elif [[ -z ${Phoenix+x} ]]; then
 
     # install the Phoenix archive:
 
-    mix archive.install hex phx_new 1.5.1
+    mix archive.install hex phx_new 1.5.6
 
     # Install inotify tools: File system watcher which Phoenix uses for live code reloading
 

@@ -13,4 +13,7 @@ sudo apt-get install esl-erlang
 #Install Elixir:
 sudo apt-get install elixir
 
+# remove the Erlang package
+rm $DIR/../erlang-solutions_2.0_all.deb
+
 printf "elixir\n" >> $DIR/installed.txt
