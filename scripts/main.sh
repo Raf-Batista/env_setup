@@ -12,7 +12,7 @@ while(($#)); do # Will run loop while there are still options
 
 	--node-info) ./scripts/info_scripts/node_info.sh ;;
 
-	-phx | --phoenix) ./scripts/languages/phoenix.sh ;; 
+	-phx | --phoenix) ./scripts/frameworks/phoenix.sh ;; 
 
 	--phoenix-info) ./scripts/info_scripts/phoenix_info.sh ;;
 
