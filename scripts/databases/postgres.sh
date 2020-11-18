@@ -16,7 +16,7 @@ fi
 
 if [[ -z ${postgres+x} ]]; then
 
-    echo "You do not have surge installed"
+    echo "You do not have postrgres installed"
 
     ########## Install Postgresql ############
 
@@ -39,6 +39,6 @@ if [[ -z ${postgres+x} ]]; then
 
 else
 
-    echo "You have surge installed"
+    echo "You have Postgres installed"
 
 fi
