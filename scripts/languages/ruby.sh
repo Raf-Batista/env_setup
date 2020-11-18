@@ -45,6 +45,10 @@ elif [[ -z ${ruby+x} ]]; then
 
   printf "ruby\n" >> $DIR/installed.txt
 
+  # Set up helpful configuration for irb 
+
+  ../tools/irb.sh
+
 else
 
   echo "You have rvm and ruby installed"
