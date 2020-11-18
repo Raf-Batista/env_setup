@@ -8,6 +8,8 @@ while(($#)); do # Will run loop while there are still options
 
 	--ruby-info) ./scripts/info_scripts/ruby_info.sh ;;
 
+	--ruby-commands) ./scripts/helpful_commands/ruby.sh ;;
+
 	-n | --node) ./scripts/node.sh ;;
 
 	--node-info) ./scripts/info_scripts/node_info.sh ;;
@@ -94,6 +96,6 @@ while(($#)); do # Will run loop while there are still options
 
 	esac
 
-	shift # remove the option, now $1 is not the next option
+	shift # remove the option, now $1 is set to the next option
 
 done
