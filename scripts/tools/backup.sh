@@ -2,7 +2,7 @@
 
 # If you use a virtual machine, you can just back up the virtual hard disk after setting up your dev environment. 
 
-# compress the home directory
+# THIS SCRIPT WILL USE GIT FOR NOW, UPDATE THIS TO OTHER MEANS OF BACKING UP
 
 backups_dir=~/backups
 
@@ -14,15 +14,26 @@ current_time=$(date "+%m.%d.%Y")
 
 filename=backup.$current_time
 
+cd ~ 
+
+if [[ ! -f .git ]]; then 
+    git init 
+    cat ~/backups >> .gitignore
+fi 
+
+status=$(git status | grep modified)
+
+if [[ $status == *"modified"* ]]; then
+  git add . 
+  git commit -m $current_time
+fi
+
 tar -zcvf ~/backups/$filename.tar.gz ~/
 
-# check for changes, if there are changes then
-    # stage and commit the changes
-    # upload to google drive
-    # gpg -c filename 
-    # gpg filename.gpg
-# 
+gpc -c ~/backups/$filename.tar.gz
 
-# cd ~ 
-# git innit 
-# cat backups >> .gitignore
+# ~/backups/$filename.tar.gz.gpg
+
+printf "\n0 19 * * 0 $DIR/scripts/tools/backup.sh\n" >>  var/spool/cron
+
+# rm ~/backups/$filename.tar.gz ~/
