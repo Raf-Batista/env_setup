@@ -14,6 +14,4 @@ sudo install gdrive /usr/local/bin/gdrive
 
 gdrive list
 
-gdrive upload backups.tar.gz
-
 printf "gdrive\n" >> $DIR/installed.txt
