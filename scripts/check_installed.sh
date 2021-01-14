@@ -12,6 +12,10 @@ if [[ $(dotnet --list-sdks 2>/dev/null)  ]]; then
     printf "dotnet\n" >> ./scripts/installed.txt
 fi 
 
+if [[ $(gigalixir --help 2>/dev/null)  ]]; then 
+    printf "gigalixir\n" >> ./scripts/installed.txt
+fi 
+
 # loop through the array and check if we can run the version command on each element, if we can then we add it to the installed.txt file
 
 for i in ${installed[@]}; do 
